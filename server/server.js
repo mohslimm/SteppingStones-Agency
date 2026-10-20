@@ -1,5 +1,6 @@
 require("dotenv").config();
 const dns = require("dns");
+const path = require("path");
 const express = require("express");
 const mongoose = require("mongoose");
 
@@ -193,6 +194,10 @@ const connectDB = async () => {
   }
 };
 connectDB();
+
+// ─── STATIC ASSETS & PROJECT RENDERS ──────────────────────────────────────
+app.use(express.static(path.join(__dirname, "public")));
+app.use("/projects", express.static(path.join(__dirname, "public/projects")));
 
 // ─── ROUTES ──────────────────────────────────────────────────────────────────
 app.use("/api/leads", leadRoutes);
